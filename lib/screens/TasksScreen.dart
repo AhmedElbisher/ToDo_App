@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:todo/TasksData.dart';
 import 'package:todo/widgets/TasksList.dart';
 
 import 'AddTaskScreen.dart';
@@ -52,7 +54,7 @@ class TasksScreen extends StatelessWidget {
                     height: 5.0,
                   ),
                   Text(
-                    "12 Tasks",
+                    "${Provider.of<TasksData>(context).tasksCount} Tasks",
                     style: TextStyle(
                       color: Colors.white,
                     ),
