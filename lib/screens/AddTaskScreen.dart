@@ -1,5 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:todo/TasksData.dart';
+import 'package:todo/models/Task.dart';
 
 class AddTaskScreen extends StatefulWidget {
   @override
@@ -68,6 +71,9 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                   child: MaterialButton(
                     onPressed: () {
                       controller.clear();
+                      Provider.of<TasksData>(context, listen: false)
+                          .addTask(Task(name: newTaskname, isDone: false));
+                      Navigator.pop(context);
                     },
                     child: Text(
                       "Add Task",

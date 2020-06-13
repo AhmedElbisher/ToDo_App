@@ -3,12 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:todo/TasksData.dart';
 import 'package:todo/widgets/TaskTile.dart';
 
-class TasksList extends StatefulWidget {
-  @override
-  _TasksListState createState() => _TasksListState();
-}
-
-class _TasksListState extends State<TasksList> {
+class TasksList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Consumer<TasksData>(builder: (context, tasksData, child) {
@@ -27,9 +22,10 @@ class _TasksListState extends State<TasksList> {
                 isDone: tasksData.tasks[index].isDone,
                 title: tasksData.tasks[index].name,
                 checkBoxCallBack: (value) {
-//                  setState(() {
-//                    tasksData.[index].toggleDoneState();
-//                  });
+                  tasksData.doneTheTask(index);
+                },
+                onLongPress: () {
+                  tasksData.deleteTask(index);
                 },
               );
             },
