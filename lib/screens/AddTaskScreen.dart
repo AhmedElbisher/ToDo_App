@@ -1,7 +1,15 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class AddTaskScreen extends StatelessWidget {
+class AddTaskScreen extends StatefulWidget {
+  @override
+  _AddTaskScreenState createState() => _AddTaskScreenState();
+}
+
+class _AddTaskScreenState extends State<AddTaskScreen> {
+  String newTaskname;
+  TextEditingController controller = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -32,6 +40,10 @@ class AddTaskScreen extends StatelessWidget {
               Container(
                 height: 40.0,
                 child: TextField(
+                  controller: controller,
+                  onChanged: (value) {
+                    newTaskname = value;
+                  },
                   autofocus: true,
                   style: TextStyle(
                       height: 1, color: Colors.blueAccent, fontSize: 20.0),
@@ -54,7 +66,9 @@ class AddTaskScreen extends StatelessWidget {
                   borderRadius: BorderRadius.circular(20.0),
                   elevation: 8.0,
                   child: MaterialButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      controller.clear();
+                    },
                     child: Text(
                       "Add Task",
                       style: TextStyle(
