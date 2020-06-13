@@ -2,6 +2,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class AddTaskScreen extends StatefulWidget {
+  final Function addTaskcallback;
+
+  AddTaskScreen({this.addTaskcallback});
+
   @override
   _AddTaskScreenState createState() => _AddTaskScreenState();
 }
@@ -12,6 +16,8 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
 
   @override
   Widget build(BuildContext context) {
+    String newTaskname;
+    TextEditingController controller = TextEditingController();
     return SingleChildScrollView(
       padding:
           EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
@@ -67,6 +73,7 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                   elevation: 8.0,
                   child: MaterialButton(
                     onPressed: () {
+                      widget.addTaskcallback(newTaskname);
                       controller.clear();
                     },
                     child: Text(

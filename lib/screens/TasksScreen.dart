@@ -1,10 +1,34 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:todo/models/Task.dart';
 import 'package:todo/widgets/TasksList.dart';
 
 import 'AddTaskScreen.dart';
 
-class TasksScreen extends StatelessWidget {
+class TasksScreen extends StatefulWidget {
+  @override
+  _TasksScreenState createState() => _TasksScreenState();
+}
+
+class _TasksScreenState extends State<TasksScreen> {
+  List<Task> tasks = [
+    Task(name: "call ahmed", isDone: false),
+    Task(name: "call khalid", isDone: false),
+    Task(name: "do the next", isDone: false),
+  ];
+
+  void updateTaskState(bool value, int index) {
+    setState(() {
+      tasks[index].toggleDoneState();
+    });
+  }
+
+  void addnewTask(String taskName) {
+    setState(() {
+      tasks.add(Task(name: taskName, isDone: false));
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -14,7 +38,9 @@ class TasksScreen extends StatelessWidget {
           showModalBottomSheet(
               isScrollControlled: true,
               context: context,
-              builder: (context) => AddTaskScreen());
+              builder: (context) => AddTaskScreen(
+                    addTaskcallback: addnewTask,
+                  ));
         },
         backgroundColor: Colors.blueAccent,
         child: Icon(Icons.add),
@@ -52,7 +78,7 @@ class TasksScreen extends StatelessWidget {
                     height: 5.0,
                   ),
                   Text(
-                    "12 Tasks",
+                    "${tasks.length} Tasks",
                     style: TextStyle(
                       color: Colors.white,
                     ),
@@ -60,7 +86,10 @@ class TasksScreen extends StatelessWidget {
                 ],
               ),
             ),
-            TasksList()
+            TasksList(
+              tasks: tasks,
+              checkboxCallback: updateTaskState,
+            )
           ],
         ),
       ),
