@@ -1,24 +1,13 @@
-<<<<<<< HEAD
-<<<<<<< HEAD
-# todo
+# TO DO
+>A Flutter application to easily manage daily tasks.
 
-A new Flutter application.
+## Tecnologies
+* ListView
+* BottomSheet
+* lifting state for state managment
+* Provider 
+* ChangeNotifire
 
-## Getting Started
 
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
-=======
-# ToDo_App
->>>>>>> 43d57c50cc4c310cd7e150f01dbafccee2c0a65a
-=======
-# ToDo_App
->>>>>>> 43d57c50cc4c310cd7e150f01dbafccee2c0a65a
+## Inspiration
+this  app inspired by[ Complete Flutter Development Bootcamp](https://www.udemy.com/course/flutter-bootcamp-with-dart/?referralCode=2B7724A180C0502A2547)
