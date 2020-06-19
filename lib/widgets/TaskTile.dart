@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class TaskTile extends StatelessWidget {
-  final bool isDone;
+  final int isDone;
   final String title;
   final Function checkBoxCallBack;
   final Function onLongPress;
@@ -14,11 +14,11 @@ class TaskTile extends StatelessWidget {
         onLongPress: onLongPress,
         title: Text(
           title,
-          style:
-              TextStyle(decoration: isDone ? TextDecoration.lineThrough : null),
+          style: TextStyle(
+              decoration: isDone == 1 ? TextDecoration.lineThrough : null),
         ),
         trailing: Checkbox(
-          value: isDone,
+          value: isDone == 1 ? true : false,
           onChanged: checkBoxCallBack,
         ));
   }

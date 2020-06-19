@@ -1,36 +1,45 @@
 import 'dart:collection';
 
 import 'package:flutter/material.dart';
+import 'package:todo/database/DatabaseHelper.dart';
 
-import 'models/Task.dart';
+import 'models/TaskEntity.dart';
 
 class TasksData extends ChangeNotifier {
-  List<Task> _tasks = [
-    Task(name: "call ahmed", isDone: false),
-    Task(name: "call khalid", isDone: false),
-    Task(name: "do the next", isDone: false),
-  ];
+  DatabaseHelper databaseHelper = DatabaseHelper();
+  List<TaskEntity> _tasks = [];
 
   int get tasksCount {
     return _tasks.length;
   }
 
-  void addTask(Task task) {
-    _tasks.add(task);
+  void addTask(TaskEntity task) async {
+    await databaseHelper.insert(task);
+    fetchTasks();
+  }
+
+  void fetchTasks() async {
+    _tasks = databaseHelper
+        .getTaskEntityListFromMapList(await databaseHelper.fetch());
     notifyListeners();
   }
 
-  void doneTheTask(int index) {
-    _tasks[index].isDone = !_tasks[index].isDone;
-    notifyListeners();
+  void flipTaskStatus(int index) async {
+    int taskStatus = _tasks[index].isCompleted;
+    if (taskStatus == 1)
+      taskStatus = 0;
+    else if (taskStatus == 0) taskStatus = 1;
+    _tasks[index].isCompleted = taskStatus;
+    databaseHelper.update(_tasks[index]);
+    fetchTasks();
   }
 
-  void deleteTask(int index) {
-    _tasks.removeAt(index);
-    notifyListeners();
+  void deleteTask(int index) async {
+    await databaseHelper.delete(_tasks[index]);
+    fetchTasks();
   }
 
-  UnmodifiableListView<Task> get tasks {
+  UnmodifiableListView<TaskEntity> get tasks {
     return UnmodifiableListView(_tasks);
   }
 }

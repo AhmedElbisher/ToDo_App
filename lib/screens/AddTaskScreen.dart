@@ -2,7 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:todo/TasksData.dart';
-import 'package:todo/models/Task.dart';
+import 'package:todo/database/DatabaseHelper.dart';
+import 'package:todo/models/TaskEntity.dart';
 
 class AddTaskScreen extends StatefulWidget {
   @override
@@ -12,6 +13,7 @@ class AddTaskScreen extends StatefulWidget {
 class _AddTaskScreenState extends State<AddTaskScreen> {
   String newTaskname;
   TextEditingController controller = TextEditingController();
+  DatabaseHelper databaseHelper = DatabaseHelper();
 
   @override
   Widget build(BuildContext context) {
@@ -69,10 +71,11 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                   borderRadius: BorderRadius.circular(20.0),
                   elevation: 8.0,
                   child: MaterialButton(
-                    onPressed: () {
+                    onPressed: () async {
                       controller.clear();
                       Provider.of<TasksData>(context, listen: false)
-                          .addTask(Task(name: newTaskname, isDone: false));
+                          .addTask(TaskEntity(newTaskname, "data ", 0));
+
                       Navigator.pop(context);
                     },
                     child: Text(

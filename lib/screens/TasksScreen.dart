@@ -9,6 +9,7 @@ import 'AddTaskScreen.dart';
 class TasksScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    Provider.of<TasksData>(context).fetchTasks();
     return Scaffold(
       backgroundColor: Colors.blueAccent,
       floatingActionButton: FloatingActionButton(
